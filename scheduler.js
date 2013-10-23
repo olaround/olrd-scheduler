@@ -59,12 +59,16 @@ config.scheduledTasks.forEach(function(task, index) {
 
 	} else {
 
+		winston.info("Starting a job for '%s' with schedule: Minute: %d, Hour: %d, Day: %s", task.endpoint, task.minute, task.hour, task.day || "everyday");
+
 		var scheduleOpts = {
 
-			minute: task.minute || null,
-			hour: task.hour || null,
-			dayOfWeek: task.day || null
+			minute: typeof task.minute == "undefined" ? null : task.minute,
+			hour: typeof task.hour == "undefined" ? null : task.hour,
+			dayOfWeek: typeof task.day == "undefined" ? null : task.day
 		};
+
+		consoleDump(scheduleOpts);
 
 		var job = schedule.scheduleJob(scheduleOpts, function() {
 
@@ -83,5 +87,7 @@ config.scheduledTasks.forEach(function(task, index) {
 				}
 			});
 		});
+
+		winston.info("Next Invocation of %s: %s", task.endpoint, job.nextInvocation().toString());
 	}
 });
