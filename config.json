@@ -1,3 +1,42 @@
 {
-	
+	"baseUrl": "https://api.olaround.me/batch/",
+	"scheduledTasks": [
+		{
+			"endpoint" : "dispatch_emails",
+			"interval" : 60
+		},
+		{
+			"endpoint" : "qr_codes",
+			"interval" : 120
+		},
+		{
+			"endpoint" : "update_popularity",
+			"interval" : 1800
+		},
+		{
+			"endpoint" : "process_newsletter",
+			"hour" : 9,
+			"minute": 0,
+			"day" : 1
+		},
+		{
+			"endpoint" : "invalidate_tokens",
+			"hour" : 9,
+			"minute": 0
+		},
+		{
+			"endpoint" : "update_dates",
+			"hour" : 0,
+			"minute": 0
+		},
+		{
+			"endpoint" : "expire_promotions",
+			"interval" : 60
+		},
+		{
+			"endpoint" : "facebook_friends",
+			"interval" : 60
+		}
+
+	]
 }
