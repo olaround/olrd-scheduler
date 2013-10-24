@@ -15,13 +15,13 @@
 		},
 		{
 			"endpoint" : "process_newsletter",
-			"hour" : 9,
+			"hour" : 4,
 			"minute": 0,
 			"day" : 3
 		},
 		{
 			"endpoint" : "invalidate_tokens",
-			"hour" : 9,
+			"hour" : 4,
 			"minute": 0
 		},
 		{
