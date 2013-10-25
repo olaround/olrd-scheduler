@@ -3,7 +3,7 @@ var request = require("request"),
 	schedule = require("node-schedule"),
 	util = require("util"),
 	config = require("./config.json"),
-	Interval = require('./lib/interval');
+	Intervals = require('./lib/interval');
 
 // Setup Winston Logging
 (function() {
@@ -21,13 +21,6 @@ function consoleDump(data, depth) {
 	console.log(util.inspect(data, {colors: true, depth: depth || 5}));
 }
 
-var j = schedule.scheduleJob({minute: [21, 26, 28, 31, 38]}, function() {
-
-	winston.info("Ran a scheduled task!");
-});
-
-consoleDump(j);
-
 /*setInterval(function() {
 
 	winston.info("Current Date: %s", (new Date()).toString());
@@ -35,27 +28,48 @@ consoleDump(j);
 
 }, 10000);*/
 
+var test = new Error("This is an error");
+
+var interval = null;
 
 config.scheduledTasks.forEach(function(task, index) {
 
 	if (task.interval) {
 
+		if (!interval) {
+
+			interval = new Intervals({
+
+				pulse: 60,
+				autoStart: true
+			});
+		}
+
 		winston.info("Starting %d sec interval job for: %s", task.interval, task.endpoint);
 
-		var interval = new Interval({route: config.baseUrl + task.endpoint, interval: task.interval * 1000}, function(err, result) {
+		var result = interval.addJob({
 
-			if (err) {
+			route: config.baseUrl + task.endpoint, 
+			interval: task.interval, 
+			callback: function(err, result) {
 
-				winston.error("Failed task: %s", task.endpoint);
-				consoleDump(err);
-				consoleDump(result);
+				if (err) {
 
-			} else {
+					winston.error("Failed task: %s", task.endpoint);
+					consoleDump(err);
+					consoleDump(result);
 
-				winston.info("Completed task: %s", task.endpoint);
-				winston.info(result);
+				} else {
+
+					winston.info("Completed task: %s", task.endpoint);
+					winston.info(result.body);
+				}
 			}
 		});
+
+		if (result.message && result.stack) {
+			winston.error(consoleDump(result));
+		}
 
 	} else {
 
