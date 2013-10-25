@@ -3,11 +3,11 @@
 	"scheduledTasks": [
 		{
 			"endpoint" : "dispatch_emails",
-			"interval" : 60
+			"interval" : 120
 		},
 		{
 			"endpoint" : "qr_codes",
-			"interval" : 120
+			"interval" : 240
 		},
 		{
 			"endpoint" : "update_popularity",
@@ -31,11 +31,11 @@
 		},
 		{
 			"endpoint" : "expire_promotions",
-			"interval" : 60
+			"interval" : 120
 		},
 		{
 			"endpoint" : "facebook_friends",
-			"interval" : 60
+			"interval" : 120
 		}
 
 	]

@@ -40,7 +40,7 @@ config.scheduledTasks.forEach(function(task, index) {
 
 			interval = new Intervals({
 
-				pulse: 60,
+				pulse: 120,
 				autoStart: true
 			});
 		}
