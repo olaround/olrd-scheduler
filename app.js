@@ -62,7 +62,7 @@ config.scheduledTasks.forEach(function(task, index) {
 				} else {
 
 					winston.info("Completed task: %s", task.endpoint);
-					winston.info(result.body);
+					// winston.info(result.body);
 				}
 			}
 		});
@@ -97,7 +97,7 @@ config.scheduledTasks.forEach(function(task, index) {
 				} else {
 
 					winston.info("Completed task: %s", task.endpoint);
-					winston.info(body);
+					// winston.info(body);
 				}
 			});
 		});
