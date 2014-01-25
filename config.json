@@ -25,6 +25,11 @@
 			"minute": 0
 		},
 		{
+			"endpoint" : "invalidate_v1_tokens",
+			"hour" : 4,
+			"minute": 0
+		},
+		{
 			"endpoint" : "update_dates",
 			"hour" : 0,
 			"minute": 0
